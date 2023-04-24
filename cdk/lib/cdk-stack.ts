@@ -5,7 +5,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { Duration } from 'aws-cdk-lib';
 import path = require('path');
 
-export class CdkStack extends cdk.Stack {
+export class WebsiteRatingStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -21,7 +21,7 @@ export class CdkStack extends cdk.Stack {
       handler: "get_website_rating.handler",
       timeout: Duration.seconds(10),
       code: lambda.Code.fromAsset(
-        path.join(__dirname, "../../lambdas/get_website_rating.py")),
+        path.join(__dirname, "../../lambdas")),
       environment: {
         RATINGTABLE: ratingTbl.tableName
       }
@@ -32,10 +32,23 @@ export class CdkStack extends cdk.Stack {
       handler: "set_website_rating.handler",
       timeout: Duration.seconds(10),
       code: lambda.Code.fromAsset(
-        path.join(__dirname, "../../lambdas/set_website_rating.py")),
+        path.join(__dirname, "../../lambdas")),
       environment: {
         RATINGTABLE: ratingTbl.tableName
       }
     });
+
+    ratingTbl.grantFullAccess(getWebsiteRatingLambda);
+    ratingTbl.grantFullAccess(setWebsiteRatingLambda);
+
+    const funcUrlOptions = {
+      authType: lambda.FunctionUrlAuthType.NONE,
+      cors: {
+        allowedOrigins: ['*']
+      }
+    };
+
+    const getWebsiteRatingLambdaURL = getWebsiteRatingLambda.addFunctionUrl(funcUrlOptions);
+    const setWebsiteRatingLambdaURL = setWebsiteRatingLambda.addFunctionUrl(funcUrlOptions);
   }
 }
