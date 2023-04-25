@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Website Rating
 // @namespace    https://github.com/InJeCTrL/Website-Rating
-// @version      0.2
+// @version      0.3
 // @description  Rate any websites and share the score.
 // @author       InJeCTrL
 // @match        *://*/*
