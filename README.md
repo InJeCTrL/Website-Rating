@@ -71,8 +71,8 @@ cdk deploy
         ```json
         {
             "host": "xxx",
-            "good": xxx,
-            "bad": xxx,
+            "good": 0,
+            "bad": 0,
             "msg": "xxx"
         }
         ```
@@ -88,7 +88,7 @@ cdk deploy
         ```json
         {
             "host": "xxx",
-            "operation": "+" / "-"
+            "operation": "+/-"
         }
         ```
     
@@ -96,8 +96,8 @@ cdk deploy
         ```json
         {
             "host": "xxx",
-            "good": xxx,
-            "bad": xxx,
+            "good": 0,
+            "bad": 0,
             "msg": "xxx"
         }
         ```
