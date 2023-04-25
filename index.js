@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Website Rating
 // @namespace    https://github.com/InJeCTrL/Website-Rating
-// @version      0.3
+// @version      0.4
 // @description  Rate any websites and share the score.
 // @author       InJeCTrL
 // @match        *://*/*
@@ -53,6 +53,14 @@
         cursor: pointer;
         font-size: 14px;
     }
+    #rateView {
+        position: absolute;
+        pointer-events: auto;
+        height: 100%;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        font-size: 13px;
+    }
 `;
 
     GM_addElement(document.children[0], 'style', { textContent: css });
@@ -67,6 +75,8 @@
             targetBox.children[1].style.width = goodPercent + '%';
             targetBox.children[2].style.width = badPercent + '%';
         }
+
+        targetBox.children[3].innerText = "👍:" + goodCnt + " 👎:" + badCnt;
     }
 
     function operate(targetBox, operation) {
@@ -128,7 +138,8 @@
     var rateBarBad = document.createElement('div');
     rateBarBad.id = 'rateBarBad';
 
-    init(rateBarBox);
+    var rateView = document.createElement('div');
+    rateView.id = 'rateView';
 
     var rateIncr = document.createElement('button');
     rateIncr.id = 'rateIncr';
@@ -138,6 +149,7 @@
 
     document.getElementById('rateBarBox').appendChild(rateBarGood);
     document.getElementById('rateBarBox').appendChild(rateBarBad);
+    document.getElementById('rateBarBox').appendChild(rateView);
 
     var rateDec = document.createElement('button');
     rateDec.id = 'rateDec';
@@ -152,4 +164,6 @@
     rateDec.onclick = function(event) {
         operate(event.target.parentElement, '-');
     }
+
+    init(rateBarBox);
 })();

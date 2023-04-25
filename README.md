@@ -48,8 +48,8 @@ cdk deploy
 ## Plans
 
 - [x] Rate websites by clicking +1 and -1 buttons.
-- [ ] Bypass CSP on some websites.
-- [ ] Show rating score clearly.
+- [x] Bypass CSP on some websites.
+- [x] Show rating score clearly.
 - [ ] Introduce public comments to bring more information.
 
 
