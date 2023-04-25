@@ -55,6 +55,8 @@
     }
 `;
 
+    GM_addElement(document.children[0], 'style', { textContent: css });
+
     function flashBar(targetBox, rating) {
         var goodCnt = rating['good'];
         var badCnt = rating['bad'];
@@ -94,7 +96,7 @@
         });
     }
 
-    function init(rateBarGood, rateBarBad) {
+    function init(targetBox) {
         var host = window.location.host;
 
         GM_xmlhttpRequest({
@@ -108,19 +110,7 @@
             }),
             onload: function(response){
                 var rating = JSON.parse(response.responseText);
-                if ("msg" in rating) {
-                    alert(rating['msg']);
-                } else {
-                    var goodCnt = rating['good'];
-                    var badCnt = rating['bad'];
-
-                    if ((goodCnt + badCnt) > 0) {
-                        var goodPercent = goodCnt * 100 / (goodCnt + badCnt);
-                        var badPercent = 100 - goodPercent;
-                        rateBarGood.style.width = goodPercent + '%';
-                        rateBarBad.style.width = badPercent + '%';
-                    }
-                }
+                flashBar(targetBox, rating);
             },
             onerror: function(response){
                 console.error(response);
@@ -130,8 +120,7 @@
 
     var rateBarBox = document.createElement('div');
     rateBarBox.id = 'rateBarBox';
-    GM_addElement(document.children[0], 'div', { id: 'rateBarBox' });
-    GM_addElement(document.children[0], 'style', { textContent: css });
+    rateBarBox = GM_addElement(document.children[0], 'div', { id: 'rateBarBox' });
 
     var rateBarGood = document.createElement('div');
     rateBarGood.id = 'rateBarGood';
@@ -139,7 +128,7 @@
     var rateBarBad = document.createElement('div');
     rateBarBad.id = 'rateBarBad';
 
-    init(rateBarGood, rateBarBad);
+    init(rateBarBox);
 
     var rateIncr = document.createElement('button');
     rateIncr.id = 'rateIncr';
