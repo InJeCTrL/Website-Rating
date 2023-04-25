@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Website Rating
 // @namespace    https://github.com/InJeCTrL/Website-Rating
-// @version      0.1
+// @version      0.2
 // @description  Rate any websites and share the score.
 // @author       InJeCTrL
 // @match        *://*/*
@@ -26,7 +26,7 @@
         line-height: 30px;
         background: black;
         pointer-events: none;
-        z-index: 99999;
+        z-index: 9999999;
         background: rgba(0,0,0,0);
     }
     #rateBarGood {
