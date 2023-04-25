@@ -21,6 +21,7 @@ def handler(event, context):
     
     if 'body' not in event:
         handler_response['statusCode'] = 400
+        handler_response['body']['msg'] = "Empty host!"
         return handler_response
     
     host = json.loads(str(base64.b64decode(event['body']), "utf-8"))['host']

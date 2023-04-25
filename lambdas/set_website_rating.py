@@ -22,6 +22,7 @@ def handler(event, context):
     
     if 'body' not in event:
         handler_response['statusCode'] = 400
+        handler_response['body']['msg'] = "Empty host!"
         return handler_response
     
     remote_ip = event['requestContext']['http']['sourceIp']
