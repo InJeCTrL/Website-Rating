@@ -10,6 +10,7 @@
 // @run-at       document-idle
 // @connect      gnkoe7p6qgdsawca7yhsqazl5a0tivbw.lambda-url.us-west-2.on.aws
 // @connect      h2qmzkyawce5k7q7mjtslwtaxm0chedg.lambda-url.us-west-2.on.aws
+// @license      MIT
 // ==/UserScript==
 
 (function() {
